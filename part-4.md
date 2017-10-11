@@ -24,7 +24,7 @@
 
 ### 锁定对象
 
-画布上的每个对象都可以以几种方式锁定。“lockMovementX”，“lockMovementY”，“lockRotation”，“lockScalingX”，“lockScalingY”是锁定相应对象动作的属性。所以将某个对象的```lockMovementX```属性设置为```true```会阻止对象被水平移动，此时你仍然可以垂直移动它。类似的，```lockRotation```可以阻止旋转，```lockScalingX``` / ```lockScalingY``` 可以阻止水平或者垂直缩放。所有这些都是可以叠加的，你可以将它们组合在一起使用。
+画布上的每个对象都可以以几种方式锁定。“lockMovementX”，“lockMovementY”，“lockRotation”，“lockScalingX”，“lockScalingY”是锁定相应对象动作的属性。所以将某个对象的```lockMovementX```属性设置为```true```会阻止对象被水平移动，此时你仍然可以垂直移动它。类似的，```lockRotation```可以阻止旋转，```lockScalingX``` / ```lockScalingY``` 可以阻止水平或者垂直缩放。所有这些都是可以叠加的，你可以将它们组合在一起使用。
 
 ### 改变边框和角
 
