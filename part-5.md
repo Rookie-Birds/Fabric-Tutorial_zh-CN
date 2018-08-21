@@ -4,4 +4,15 @@
 
 ## 缩放和平移（Zoom and panning）
 
-随[官网](http://fabricjs.com/fabric-intro-part-5)更新中...
+1. 让我们看看如何通过鼠标交互实现缩放和平移的基本系统。我们将使用鼠标滚轮在画布上放大20倍（2000％）并使用alt +单击动作进行拖动。 
+我们开始基本控制：
+[查看demo](http://fabricjs.com/fabric-intro-part-5#step1)
+
+2. 这是一个基本的缩放控制，限制在1%到2000%之间。我们现在要添加画布的拖动。我们将使用ALT +拖动，但您可以更改为另一种组合。按住alt键下拉鼠标会将布尔值设为true，这样鼠标移动事件就能知道是开始拖拽了：
+[查看demo](http://fabricjs.com/fabric-intro-part-5#step2)
+
+3. 好的，这是一个基本设置，可以让你控制缩放和平移。仍然有一些可能的增强。 例如，我们可以使轮缩放使画布围绕光标所在的点居中：
+[查看demo](http://fabricjs.com/fabric-intro-part-5#step3)
+
+4. 最后一点，我们可以限制平移区域以避免在一个方向上无限延伸。我们描出一个1000×1000像素的矩形来表示平移区域。我们添加代码来限制边界内的移动：
+[查看demo](http://fabricjs.com/fabric-intro-part-5#step4)

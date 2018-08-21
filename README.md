@@ -26,3 +26,11 @@
   - Node.js上的Fabric
 - [第五部分](./part-5.md)
   - 缩放和平移（Zoom and panning）
+- [第六部分](./part-6.md)
+  - 变形（transform）
+- [第七部分](./part-7.md)
+  - 子类化Textbox类以生成位图文本
+- [第八部分](./part-8.md)
+  - clipPaths剪切基础
+  - clipPaths嵌套和更复杂的场景
+  - canvas上使用clipPaths
