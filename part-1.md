@@ -143,7 +143,7 @@ Fabric提供了7种基础形状：
 - [fabric.Rect](http://fabricjs.com/docs/fabric.Rect.html)
 - [fabric.Triangle](http://fabricjs.com/docs/fabric.Triangle.html)
 
-想画一个圈子？只需创建一个圆形对象，并将其添加到画布。与任何其他基本形状相同：
+想画一个圆？只需创建一个圆形对象，并将其添加到画布。与任何其他基本形状相同：
 
 ```js
 var circle = new fabric.Circle({
@@ -166,7 +166,7 @@ canvas.add(circle, triangle);
 
 Fabric为我们处理画布渲染和状态管理。我们只需要自己修改对象。
 
-以前的例子演示了```set```方法，以及如何从对象前一个位置调用```set（{left：20，top：50}）```来移动对象。以类似的方式，我们可以改变对象的任何其他属性。但这些属性是什么？
+以前的例子演示了```set```方法，以及如何从对象前一个位置调用```set({left：20，top：50})```来移动对象。以类似的方式，我们可以改变对象的任何其他属性。但这些属性是什么？
 
 那么，正如你所期望的那样，可以改变定位：**top**，**left**。尺寸：**width**，**height**。渲染： **fill**, **opacity**, **stroke**, **strokeWidth**。缩放和旋转：**scaleX**, **scaleY**, **angle**;甚至可以翻转：**flipX**，**flipY**。歪斜：**skewX**，**skewY**。
 
@@ -190,7 +190,7 @@ rect.set('angle', 15).set('flipY', true);
 
 这表明```set```是一种通用的方法。你可能经常使用它，所以它被设计得尽可能的方便。
 
-说了如何```set```的方法，那么如何获取呢？这就有了与之对应的```get```方法，h还有一些具体的```get*```，要读取对象的“width”值，可以使用```get（'width'```）或```getWidth（）```。获取“scaleX”值使用```get（'scaleX'）```或```getScaleX（）```，等等。对于每个“公有”对象属性（“stroke”，“strokeWidth”，“angle”等），都可以使用getWidth或getScaleX等方法。
+说了如何```set```的方法，那么如何获取呢？这就有了与之对应的```get```方法，h还有一些具体的```get*```，要读取对象的“width”值，可以使用```get('width')```或```getWidth()```。获取“scaleX”值使用```get('scaleX')```或```getScaleX()```，等等。对于每个“公有”对象属性(“stroke”，“strokeWidth”，“angle”等)，都可以使用getWidth或getScaleX等方法。
 
 您可能会注意到，在早期的示例中，对象在实例化的时候，我们直接传入的配置参数，而上边的例子我们才实例化对象的时候没有传入配置，而是使用的```set```方法传递配置。这是因为它是完全一样的。您可以在创建时“配置”对象，也可以使用```set```方法:
 
@@ -203,11 +203,12 @@ var rect = new fabric.Rect();
 rect.set({ width: 10, height: 20, fill: '#f55', opacity: 0.7 });
 ```
 
-### 默认选项
+### 默认设置
 
-在这一点上，您可能会问，当我们创建对象而不传递任何“配置”对象时会发生什么。它还有这些属性吗？
+关于这一点，您可能会问，当我们创建对象而不传递任何“配置”对象时会发生什么。它还有这些属性吗？
 
-当然是。 Fabric中的对象总是具有默认的属性集。当在创建过程中发生变化时，这是对给定的“给定”的默认属性集。我们可以自己试试看看：
+当然是。 Fabric 中的对象总是具有一组默认的属性值。
+在创建过程中参数未被传递时会被设置成默认的参数。我们可以自己试试看看：
 
 ```js
 var rect = new fabric.Rect(); // 注意没有传递参数
@@ -224,7 +225,7 @@ rect.get('stroke'); // null
 rect.get('opacity'); // 1
 ```
 
-我们的矩形有一个默认的属性集。它位于0,0，是黑色，完全不透明，没有描边，**没有尺寸**（宽度和高度为0）。由于没有尺寸，我们无法在画布上看到它。但是给它宽度/高度的任何正值肯定会在画布的左上角显示一个黑色矩形。
+我们的矩形有一组默认的属性。它位于 0,0，黑色，完全不透明，没有描边，**没有尺寸**（宽度和高度为0）。由于没有尺寸，我们无法在画布上看到它。但是给它宽度/高度的任何正值肯定会在画布的左上角显示一个黑色矩形。
 
 ![ ](http://fabricjs.com/article_assets/6.png)
 
@@ -259,9 +260,9 @@ circle instanceof fabric.Object; // true
 
 ## Canvas
 
-现在我们更详细地讨论了对象，让我们回到canvas。
+现在我们更详细地讨论了对象，让我们回到 canvas。
 
-首先你可以看到所有的Fabric例子如果创建canvas对象：```new fabric.Canvas（'...'）```。```fabric.Canvas```作为围绕```<canvas>```元素的包装器，并负责管理该canvas上的所有Fabric对象。它需要一个元素的id，并返回一个```fabric.Canvas```的实例。
+首先你可以看到所有的Fabric例子如果创建 canvas 对象：```new fabric.Canvas('...')```。```fabric.Canvas```作为围绕```<canvas>```元素的包装器，并负责管理该canvas上的所有Fabric对象。它需要一个元素的id，并返回一个```fabric.Canvas```的实例。
 
 我们可以```add```对象，引用它们，或者```remove```它们：
 
@@ -277,7 +278,7 @@ canvas.getObjects(); // 获取所有对象（只有一个矩形）
 canvas.remove(rect); // 移除这个矩形
 ```
 
-管理对象是Fabric的主要用途。其实它本事也是**可配置**的，需要为整个画布设置背景颜色或图像？将所有内容剪切到某个区域？设置不同的宽度/高度？指定画布是否互动？所有这些选项（和其他）可以在```fabric.Canvas```上设置，无论是在创建时还是之后：
+尽管管理对象是```fabric.Canvas```的主要目的。其实它本身也是**可配置**的，需要为整个画布设置背景颜色或图像？将所有内容剪切到某个区域？设置不同的宽度/高度？指定画布是否互动？所有这些选项（和其他）可以在```fabric.Canvas```上设置，无论是在创建时还是之后：
 
 ```js
 var canvas = new fabric.Canvas('c', {
@@ -304,9 +305,9 @@ canvas.onFpsUpdate = function(){ /* ... */ };
 ![ ](http://fabricjs.com/article_assets/7.png)
 ![ ](http://fabricjs.com/article_assets/8.png)
 
-如果我们希望用户允许在画布上拖动某些东西，比如一个图片，我们需要做的就是初始化画布并在其上添加一个对象。不需要额外的配置或设置。
+如果我们希望允许用户在画布上拖动某些东西，比如一个图片，我们需要做的就是初始化画布并在其上添加一个对象。不需要额外的配置或设置。
 
-为了控制这种交互性，我们可以在画布上使用Fabric的“selection”布尔属性，结合各个对象的“selectable”布尔属性来使用。
+为了控制这种交互性，我们可以在画布上使用 Fabric 的 `selection` 布尔属性，结合各个对象的 `selectable` 布尔属性来使用。
 
 ```js
 var canvas = new fabric.Canvas('c');
@@ -315,7 +316,7 @@ canvas.selection = false; // 禁止所有选中
 rect.set('selectable', false); // 只是禁止这个矩形选中
 ```
 
-但是如果你不想要这样的互动层呢？如果是这样，您可以随时用```fabric.StaticCanvas```替换```fabric.Canvas```。初始化的语法是相同的;初始化时使用```StaticCanvas```而不是```Canvas```。
+但是如果根本不想要这样的互动呢？如果是这样，您可以随时用```fabric.StaticCanvas```替换```fabric.Canvas```。初始化的语法是相同的;初始化时使用```StaticCanvas```而不是```Canvas```。
 
 ```js
 var staticCanvas = new fabric.StaticCanvas('c');
@@ -337,7 +338,7 @@ staticCanvas.add(
 
 说到图像...
 
-在画布上添加矩形和圆圈很有趣，但为什么我们不玩某些图像？正如你现在想象的那样，Fabric使这个很容易。我们来实例化```fabric.Image```对象并将其添加到画布中：
+在画布上添加矩形和圆圈很有趣，但为什么我们不玩某些图像？正如你现在想象的那样，Fabric 使这个很容易。我们来实例化```fabric.Image```对象并将其添加到画布中：
 
 ```html
 <canvas id="c"></canvas>
@@ -356,7 +357,7 @@ var imgInstance = new fabric.Image(imgElement, {
 canvas.add(imgInstance);
 ```
 
-注意我们如何将图像元素传递给```fabric.Image```构造函数。这将创建一个```fabric.Image```的实例，就像文档中的图像一样。此外，我们立即将左/顶值设置为100/100，角度为30，不透明度为0.85。一旦添加到画布中，图像呈现在100,100位置，30度角，并且稍微透明！不错。
+注意我们如何将图像元素传递给```fabric.Image```构造函数。这将创建一个```fabric.Image```的实例，就像文档中的图像一样。此外，我们立即将左/上值设置为100/100，角度为30，不透明度为0.85。一旦添加到画布中，图像呈现在100,100位置，30度角，并且稍微透明！不错。
 
 ![ ](http://fabricjs.com/article_assets/9.png)
 
@@ -382,11 +383,11 @@ fabric.Image.fromURL('my_image.png', function(oImg) {
 
 我们已经看过简单的形状，然后看了图像。那么更复杂，丰富的形状和内容呢？
 
-认识更强大的搭档：路径（Path）和组合（Group）
+认识更强大的搭档：路径（Path）和组合（Groups）
 
-Fabric中的path表示可以填充，描边和修改的形状的轮廓。path由一系列命令组成，基本上模仿了从一个点到另一个点的笔。借助“move”，“line”，“curve”或“arc”等命令，path可以形成令人难以置信的复杂形状。在Paths（路径组合）团队的帮助下，可能性更大。
+Fabric 中的 paths 表示可以填充，描边和修改的形状的轮廓。Paths 由一系列命令组成，基本上模仿了从一个点到另一个点的笔。借助“move”，“line”，“curve”或“arc”等命令，path可以形成令人难以置信的复杂形状。在Paths（路径组合）团队的帮助下，可能性更大。
 
-Fabric中的路径与[SVG <path>元素](http://www.w3.org/TR/SVG/paths.html#PathElement)非常相似。它们使用相同的命令，可以从```<path>```元素创建，并将其序列化。稍后我们将更加仔细地观察序列化和SVG解析，但现在值得一提的是，您很可能很少手动创建Path实例，相反，您将使用Fabric的内置SVG解析器。但是要了解Path对象是什么，我们来尝试用手创建一个简单的对象：
+Fabric 中的路径与 [SVG <path>元素](http://www.w3.org/TR/SVG/paths.html#PathElement) 非常相似。它们使用相同的命令，可以从```<path>```元素创建，并将其序列化。稍后我们将更加仔细地观察序列化和SVG解析，但现在值得一提的是，您很可能很少手动创建Path实例，相反，您将使用Fabric的内置SVG解析器。但是要了解Path对象是什么，我们来尝试用手创建一个简单的对象：
 
 ```js
 var canvas = new fabric.Canvas('c');
@@ -397,7 +398,7 @@ canvas.add(path);
 
 ![ ](http://fabricjs.com/article_assets/10.png)
 
-我们通过传递一串路径指令，实例化```fabric.Path```对象，虽然看起来很神秘，但实际上很容易理解。“M”代表“move”命令，并告诉笔移动到```0，0```坐标。“L”表示“line”，笔画线为```200，100```坐标。然后，另一个“L”创建一个连接```170，200```坐标的线段。最后，“z”指示绘画笔关闭当前路径并完成形状。结果，我们得到一个三角形。
+我们通过传递一串路径指令，实例化```fabric.Path```对象，虽然看起来很神秘，但实际上很容易理解。“M”代表“move”命令，并告诉笔移动到```0,0```坐标。“L”表示“line”，笔画线为```200,100```坐标。然后，另一个“L”创建一个连接```170,200```坐标的线段。最后，“z”指示绘画笔关闭当前路径并完成形状。结果，我们得到一个三角形。
 
 由于```fabric.Path```与Fabric中的任何其他对象一样，我们还可以更改其某些属性。但是我们可以修改更多：
 
@@ -434,7 +435,7 @@ canvas.add(path.set({ left: 100, top: 200 }));
 
 不过你可能永远不会使用这样复杂的命令，相反，您可能需要使用像```fabric.loadSVGFromString```或```fabric.loadSVGFromURL```方法来加载整个SVG文件,然后让Fabric的SVG解析器完成对所有SVG元素的遍历和创建相应的Path对象的工作。
 
-谈到整个SVG文件，而Fabric的路径通常表示SVG```<path>```元素，SVG文档中通常存在的路径集合表示为Group（```fabric.Group```实例）。你可以想像，Group(组合)只不过是一组Path实例和其他对象。而且由于```fabric.Group```从```fabric.Object```继承，它可以像任何其他对象一样添加到画布中，并以相同的方式进行操作。
+谈到整个SVG文件，而Fabric的路径通常表示SVG```<path>```元素，SVG文档中通常存在的路径集合表示为Group(```fabric.Group```实例)。你可以想像，Group(组合)只不过是一组Path实例和其他对象。而且由于```fabric.Group```从```fabric.Object```继承，它可以像任何其他对象一样添加到画布中，并以相同的方式进行操作。
 
 就像Path一样，你可能不会直接的使用它。但是，如果您在解析SVG文档之后偶然发现了一个问题，那么您将确切地知道它是什么以及它的目的是什么。
 
