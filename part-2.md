@@ -36,7 +36,7 @@ rect.animate('left', '+=100', { onChange: canvas.renderAll.bind(canvas) });
 rect.animate('angle', '-=5', { onChange: canvas.renderAll.bind(canvas) });
 ```
 
-你可能会想知道为什么我们总是在那里指定“onChange”回调。不是说第三个参数是可选的吗？是为了每个动画帧的渲染都能让我们看到实际的动画效果！您可以看到，当我们调用```animate```方法时，它只会随着时间的推移赋予属性值，遵循特定的算法(例如动效)。所以```rect.animate（'angle'，45）```会改变对象的角度，但不会在每次角度变化后重新渲染画布屏幕。我们显然需要重新渲染才能看到实际的动画。
+你可能会想知道为什么我们总是在那里指定“onChange”回调。不是说第三个参数是可选的吗？是为了每个动画帧的渲染都能让我们看到实际的动画效果！您可以看到，当我们调用```animate```方法时，它只会随着时间的推移赋予属性值，遵循特定的算法(例如动效)。所以```rect.animate('angle'，45)```会改变对象的角度，但不会在每次角度变化后重新渲染画布屏幕。我们显然需要重新渲染才能看到实际的动画。
 
 记住，在画布的下面有整个对象模型。对象有自己的属性和关系，而canvas只负责将它们的存在投射到外部世界。
 
@@ -170,7 +170,7 @@ new fabric.Color('rgb(100,0,100)');
 new fabric.Color('rgba(10, 20, 30, 0.5)');
 ```
 
-转换也很简单。 ```toHex（）```将颜色实例转换为十六进制表示。 ```toRgb（）```可以转换为RGB，```toRgba（）```转换为带Alpha通道的RGB。
+转换也很简单。 ```toHex()```将颜色实例转换为十六进制表示。 ```toRgb()```可以转换为RGB，```toRgba()```转换为带Alpha通道的RGB。
 
 ```js
 new fabric.Color('#f55').toRgb(); // "rgb(255,85,85)"
@@ -201,16 +201,17 @@ var circle = new fabric.Circle({
   radius: 50
 });
 
-circle.setGradient('fill', {
-  x1: 0,
-  y1: 0,
-  x2: 0,
-  y2: circle.height,
-  colorStops: {
-    0: '#000',
-    1: '#fff'
-  }
-});
+var gradient = new fabric.Gradient({
+type: 'linear',
+gradientUnits: 'pixels', // or 'percentage'
+coords: { x1: 0, y1: 0, x2: 0, y2: circle.height },
+colorStops:[
+{ offset: 0, color: '#000' },
+{ offset: 1, color: '#fff'}
+]
+})
+
+circle.set('fill', gradient);
 ```
 
 ![ ](http://fabricjs.com/article_assets/2_15.png)
@@ -482,7 +483,7 @@ canvas.on('mouse:down', function(options) {
 
 请注意，每当一个对象被移动（或缩放）甚至一个像素时，诸如“object:moving”（或“object:scaling”）的事件被连续地触发。另一方面，诸如“object:modified”或“selection:created”之类的事件仅在操作结束时被触发（对象修改或选择创建）。
 
-注意我们如何将事件附加到画布上（```canvas.on（'mouse：down'，...）```）。可以想象，这意味着事件都被限定为canvas实例。如果您在页面上有多个canvas，您可以将不同的事件侦听器附加到每个canvas上。他们都是独立的，只处理分配给他们自己的事件。
+注意我们如何将事件附加到画布上（```canvas.on('mouse：down'，...)```）。可以想象，这意味着事件都被限定为canvas实例。如果您在页面上有多个canvas，您可以将不同的事件侦听器附加到每个canvas上。他们都是独立的，只处理分配给他们自己的事件。
 
 为方便起见，Fabric将进一步提升事件系统，并允许您将侦听器直接附加到canvas画布中的对象上。让我们来看看：
 

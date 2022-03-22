@@ -38,7 +38,7 @@ var group = new fabric.Group([ circle, text ], {
 canvas.add(group);
 ```
 
-首先，我们创建了一个“hello world”文本对象。将```originX```和```originY```设置为“center”会使得将以组合为中心，默认情况下，组合成员相对于组合的左上角定位。然后，圆圈以100px半径填充“#eef”颜色并垂直缩放0.5倍（scaleY = 0.5）。然后，我们创建了一个```fabric.Group```实例，通过一个包含这两个Fabric对象的数组传递给这个组合，并给它的位置为150/100和-10角度。最后，将这个组合添加到画布（使用```canvas.add（）```）。
+首先，我们创建了一个“hello world”文本对象。将```originX```和```originY```设置为“center”会使得将以组合为中心，默认情况下，组合成员相对于组合的左上角定位。然后，圆圈以100px半径填充“#eef”颜色并垂直缩放0.5倍（scaleY = 0.5）。然后，我们创建了一个```fabric.Group```实例，通过一个包含这两个Fabric对象的数组传递给这个组合，并给它的位置为150/100和-10角度。最后，将这个组合添加到画布（使用```canvas.add()```）。
 
 您会看到画布上的一个对象，看起来像一个椭圆标签。请注意，如果我们要修改他们的样子，可以将该他们作为单个实体使用，我们只是改变组合的属性，给出要更改的的```left```，```top```和```angle```值。
 
@@ -47,14 +47,14 @@ canvas.add(group);
 让我们再来修改一下canvas画布上的这个组合：
 
 ```js
-group.item(0).setFill('red');
+group.item(0).set('fill', 'red');
 group.item(1).set({
-  text: 'trololo',
-  fill: 'white'
+text: 'trololo',
+fill: 'white'
 });
 ```
 
-这里发生了什么？我们通过```item（）```方法访问组中的各个对象，并修改其属性。第一个对象是椭圆，第二个是文字。让我们看看发生了什么：
+这里发生了什么？我们通过```item()```方法访问组中的各个对象，并修改其属性。第一个对象是椭圆，第二个是文字。让我们看看发生了什么：
 
 ![ ](http://fabricjs.com/article_assets/3_2.png)
 
@@ -109,7 +109,7 @@ fabric.Image.fromURL('/assets/pug.jpg', function(img) {
 
 ![ ](http://fabricjs.com/article_assets/3_4.png)
 
-在使用组合时可以使用哪些其他方法?使用```getObjects（）```方法，可以返回一个包含组合中所有对象的数组，使用```size（）```可以知道组合中所有对象的数量。使用```contains（）```可以检查某个对象是否在组合中。我们之前看到的```item（）```可以检索组中的特定对象。使用```forEachObject```可以遍历每个组合中的对象。还有```add（）```和```remove（）```方法来相应地从组中添加和删除对象。
+在使用组合时可以使用哪些其他方法?使用```getObjects()```方法，可以返回一个包含组合中所有对象的数组，使用```size()```可以知道组合中所有对象的数量。使用```contains()```可以检查某个对象是否在组合中。我们之前看到的```item()```可以检索组中的特定对象。使用```forEachObject```可以遍历每个组合中的对象。还有```add()```和```remove()```方法来相应地从组中添加和删除对象。
 
 您可以通过2种方式添加/删除组中的对象：更新组合的尺寸/位置，我们建议使用更新尺寸，除非您正在执行批量处理操作，并且在进程中组合的宽度/高度都没有问题。
 
@@ -181,7 +181,7 @@ canvas.add(group);
 
 ### toObject, toJSON
 
-Fabric中的canvas序列化方法主要是```toObject（）```和```toJSON（）```方法。我们来看一个简单的例子，首先序列化一个空的画布：
+Fabric中的canvas序列化方法主要是```toObject()```和```toJSON()```方法。我们来看一个简单的例子，首先序列化一个空的画布：
 
 ```js
 var canvas = new fabric.Canvas('c');
@@ -189,7 +189,7 @@ JSON.stringify(canvas);
 // '{"objects":[],"background":"rgba(0, 0, 0, 0)"}'
 ```
 
-我们使用ES5 ```JSON.stringify（）```方法，如果```toJSON```方法存在，则会隐性调用。由于Fabric中的canvas实例已经具有```toJSON```方法，就相当于我们调用了```canvas.toJSON（）```。
+我们使用ES5 ```JSON.stringify()```方法，如果```toJSON```方法存在，则会隐性调用。由于Fabric中的canvas实例已经具有```toJSON```方法，就相当于我们调用了```canvas.toJSON()```。
 
 注意返回的表示空的canvas画布的字符串。它是JSON形式，并且由“objects”和“background”属性组成。“objects”当前为空，因为canvas上没有任何内容，而background的默认值为“rgba（0，0，0，0）”）。
 
@@ -240,7 +240,7 @@ console.log(JSON.stringify(canvas));
 '{"objects":[{"type":"rect","left":50,"top":50,"width":20,"height":20,"fill":"green","overlayFill":null,"stroke":null,"strokeWidth":1,"strokeDashArray":null,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"selectable":true,"hasControls":true,"hasBorders":true,"hasRotatingPoint":false,"transparentCorners":true,"perPixelTargetFind":false,"rx":0,"ry":0},{"type":"circle","left":100,"top":100,"width":100,"height":100,"fill":"red","overlayFill":null,"stroke":null,"strokeWidth":1,"strokeDashArray":null,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"selectable":true,"hasControls":true,"hasBorders":true,"hasRotatingPoint":false,"transparentCorners":true,"perPixelTargetFind":false,"radius":50}],"background":"rgba(0, 0, 0, 0)"}'
 ```
 
-注意看```“type”：“rect”```和```“type”：“circle”```部分，即使起初看起来可能会有很多输出，但是与图像序列化所得到的结果无关。只是为了比较，让我们来看看你将用```canvas.toDataURL（'png'）```获得的一个字符串的大约1/10（！）
+注意看```“type”：“rect”```和```“type”：“circle”```部分，即使起初看起来可能会有很多输出，但是与图像序列化所得到的结果无关。只是为了比较，让我们来看看你将用```canvas.toDataURL({format: 'png'})``(译者注：这个命令原版有误)`获得的一个字符串的大约1/10（！）
 
 ```
 data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAK8CAYAAAAXo9vkAAAgAElEQVR4Xu3dP4xtBbnG4WPAQOQ2YBCLK1qpoQE1/m+NVlCDwUACicRCEuysrOwkwcJgAglEItRQaWz9HxEaolSKtxCJ0FwMRIj32zqFcjm8e868s2fNWo/Jygl+e397rWetk5xf5pyZd13wPwIECBAgQIAAAQIECBxI4F0H+hwfQ4AAAQIECBAgQIAAgQsCxENAgAABAgQIECBAgMDBBATIwah9EAECBAgQIECAAAECAsQzQIAAAQIECBAgQIDAwQQEyMGofRABAgQIECBAgAABAgLEM0CAAAECBAgQIECAwMEEBMjBqH0QAQIECBAgQIAAAQICxDNAgAABAgQIECBAgMDBBATIwah9EAECBAgQIECAAAECAsQzQIAAAQIECBAgQIDAwQQEyMGofRABAgQIECBAgAABAgLEM0CAAAECBAgQIECAwMEEBMjBqH0QAQIECBAgQIAAAQICxDNAgAABAgQIECBAgMDBBATIwah9EAECBAgQIECAAAECAsQzQIAAAQIECBAgQIDAwQQEyMGofRABAgQIECBAgAABAgLEM0CAAAECBAgQIECAwMEEBMjBqH0QAQIECBAgQIAAAQICxDNAgAABAgQIECBAgMDBBATIwah9EAECBAgQIECAAAECAsQzQIAAAQIECBAgQIDAwQQEyMGofRABAgQIECBAgAABAgLEM0CAAAECBAgQIECAwMEEBMjBqH0QAQIECBAgQIAAAQICxDNAgAABAgQIECBAgMDBBATIwah9EAECBAgQIECAAAECAsQzQIAAAQIECBAgQIDAwQQEyMGofRABAgQIECBAgAABAgLEM0CAAAECBAgQIECAwMEEBMjBqH0QAQIECBAgQIAAAQICxDNAgAABAgQIECBAgMDBBATIwah9EAECBAgQIECAAAECAsQzQIAAAQIECBAgQIDAwQQEyMGofRABAgQIECBAgAABAgLEM0CAAAECBAgQIECAwMEEBMjBqH0QAQIECBAgQIAAAQICxDNAgAABAgQIECBAgMDBBATIwah9EAECBAgQIECAAAECyw+Qb134R/U2fevC8q+5esGWESBAgAABAgQIEFiOwPL/MC5AlvO0OBMCBAgQIECAAAECJxQQICcE9HYCBAgQIECAAAECBPYXECD7W3klAQIECBAgQIAAAQInFBAgJwT0dgIECBAgQIAAAQIE9hcQIPtbeSUBAgQIECBAgAABAicUECAnBPR2AgQIECBAgAABAgT2FxAg+1t5JQECBAgQIECAAAECJxQQICcE9HYCBAgQIECAAAECBPYXECD7W3klAQIECBAgQIAAAQInFBAgJwTc9+3z49yvmNd+dI7PzPHJOW6Y4wNzXD3HlXNc9pZdb85/vzbHK3P8aY7n5vj1HL+Y43dz417f97O9jgABAgQIECBAgMBSBATIKd2JCY5dWNwyx5fn+PwcV5U/6tXZ99M5fjjHk3Mjd6HifwQIECBAgAABAgQWLSBAirdnouP6WXfvHHfOcU1x9T6rXp4XPTLHA3NTX9jnDV5DgAABAgQIECBA4NACAuSE4hMdl8+Kr83xzTmuO+G61ttfnEXfnuN7c4PfaC21hwABAgQIECBAgMBJBQTIJQpOeFw7b71/jtsvccWh3vbYfNB9c6NfOtQH+hwCBAgQIECAAAECFxMQIMd8No7C4+F5283HfOtZv/ypOYG7hMhZ3wafT4AAAQIECBDYtoAA2fP+H/1Vqwd3f4jf8y1Lfdkunu7xV7OWenucFwECBAgQIEBg3QICZI/7O/Fxx7xs9wf3t36r3D3evciX7L7F7+6rIY8u8uycFAECBAgQIE
@@ -248,7 +248,7 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAK8CAYAAAAXo9vkAAAgAElEQVR4Xu
 
 你可能会想知道为什么还有```toObject```。很简单，```toObject```返回与```toJSON```相同的表示形式，只能以实际对象的形式，而不用字符串序列化。例如，以一个绿色矩形的canvas的之前的例子。
 
-```canvas.toObject（）```的输出是这样的：
+```canvas.toObject()```的输出是这样的：
 
 ```json
 { "background" : "rgba(0, 0, 0, 0)",
@@ -367,7 +367,7 @@ console.log(canvas.toSVG());
 ```js
 var canvas = new fabric.Canvas();
 
-canvas.loadFromJSON('{"objects":[{"type":"rect","left":50,"top":50,"width":20,"height":20,"fill":"green","overlayFill":null,"stroke":null,"strokeWidth":1,"strokeDashArray":null,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"selectable":true,"hasControls":true,"hasBorders":true,"hasRotatingPoint":false,"transparentCorners":true,"perPixelTargetFind":false,"rx":0,"ry":0},{"type":"circle","left":100,"top":100,"width":100,"height":100,"fill":"red","overlayFill":null,"stroke":null,"strokeWidth":1,"strokeDashArray":null,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"selectable":true,"hasControls":true,"hasBorders":true,"hasRotatingPoint":false,"transparentCorners":true,"perPixelTargetFind":false,"radius":50}],"background":"rgba(0, 0, 0, 0)"}');
+canvas.loadFromJSON('{"objects":[{"type":"rect","left":50,"top":50,"width":20,"height":20,"fill":"green","overlayFill":null,"stroke":null,"strokeWidth":1,"strokeDashArray":null,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"selectable":true,"hasControls":true,"hasBorders":true,"hasRotatingPoint":false,"transparentCorners":true,"perPixelTargetFind":false,"rx":0,"ry":0},{"type":"circle","left":100,"top":100,"width":100,"height":100,"fill":"red","overlayFill":null,"stroke":null,"strokeWidth":1,"strokeDashArray":null,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"selectable":true,"hasControls":true,"hasBorders":true,"hasRotatingPoint":false,"transparentCorners":true,"perPixelTargetFind":false,"radius":50}],"background":"rgba(0, 0, 0, 0)"}',() => { });
 ```
 
 两个物体“神奇”出现在画布上：
@@ -378,7 +378,7 @@ canvas.loadFromJSON('{"objects":[{"type":"rect","left":50,"top":50,"width":20,"h
 
 ![ ](http://fabricjs.com/article_assets/3_6.png)
 
-而这个形状的```JSON.stringify（canvas）```输出是：
+而这个形状的```JSON.stringify(canvas)```输出是：
 
 ```
 {"objects":[{"type":"path","left":184,"top":177,"width":175,"height":151,"fill":"#231F20","overlayFill":null,"stroke":null,"strokeWidth":1,"strokeDashArray":null,"scaleX":1,"scaleY":1,"angle":-19,"flipX":false,"flipY":false,"opacity":1,"selectable":true,"hasControls":true,"hasBorders":true,"hasRotatingPoint":false,"transparentCorners":true,"perPixelTargetFind":false,"path":[["M",39.502,61.823],["c",-1.235,-0.902,-3.038,-3.605,-3.038,-3.605],["s",0.702,0.4,3.907,1.203],["c",3.205,0.8,7.444,-0.668,10.114,-1.97],["c",2.671,-1.302,7.11,-1.436,9.448,-1.336],["c",2.336,0.101,4.707,0.602,4.373,2.036],["c",-0.334,1.437,-5.742,3.94,-5.742,3.94],["s",0.4,0.334,1.236,0.334],["c",0.833,0,6.075,-1.403,6.542,-4.173],["s",-1.802,-8.377,-3.272,-9.013],["c",-1.468,-0.633,-4.172,0,-4.172,0],["c",4.039,1.438,4.941,6.176,4.941,6.176],["c",-2.604,-1.504,-9.279,-1.234,-12.619,0.501],["c",-3.337,1.736,-8.379,2.67,-10.083,2.503],["c",-1.701,-0.167,-3.571,-1.036,-3.571,-1.036],["c",1.837,0.034,3.239,-2.669,3.239,-2.669],["s",-2.068,2.269,-5.542,0.434],["c",-3.47,-1.837,-1.704,-8.18,-1.704,-8.18],["s",-2.937,5.909,-1,9.816],["C",34.496,60.688,39.502,61.823,39.502,61.823],["z"],["M",77.002,40.772],["c",0,0,-1.78,-5.03,-2.804,-8.546],["l",-1.557,8.411],["l",1.646,1.602],["c",0,0,0,-0.622,-0.668,-1.691],["C",72.952,39.48,76.513,40.371,77.002,40.772],["z"],["M",102.989,86.943],["M",102.396,86.424],["c",0.25,0.22,0.447,0.391,0.594,0.519],["C",102.796,86.774,102.571,86.578,102.396,86.424],["z"],["M",169.407,119.374],["c",-0.09,-5.429,-3.917,-3.914,-3.917,-2.402],["c",0,0,-11.396,1.603,-13.086,-6.677],["c",0,0,3.56,-5.43,1.69,-12.461],["c",-0.575,-2.163,-1.691,-5.337,-3.637,-8.605],["c",11.104,2.121,21.701,-5.08,19.038,-15.519],["c",-3.34,-13.087,-19.63,-9.481,-24.437,-9.349],["c",-4.809,0.135,-13.486,-2.002,-8.011,-11.618],["c",5.473,-9.613,18.024,-5.874,18.024,-5.874],["c",-2.136,0.668,-4.674,4.807,-4.674,4.807],["c",9.748,-6.811,22.301,4.541,22.301,4.541],["c",-3.097,-13.678,-23.153,-14.636,-30.041,-12.635],["c",-4.286,-0.377,-5.241,-3.391,-3.073,-6.637],["c",2.314,-3.473,10.503,-13.976,10.503,-13.976],["s",-2.048,2.046,-6.231,4.005],["c",-4.184,1.96,-6.321,-2.227,-4.362,-6.854],["c",1.96,-4.627,8.191,-16.559,8.191,-16.559],["c",-1.96,3.207,-24.571,31.247,-21.723,26.707],["c",2.85,-4.541,5.253,-11.93,5.253,-11.93],["c",-2.849,6.943,-22.434,25.283,-30.713,34.274],["s",-5.786,19.583,-4.005,21.987],["c",0.43,0.58,0.601,0.972,0.62,1.232],["c",-4.868,-3.052,-3.884,-13.936,-0.264,-19.66],["c",3.829,-6.053,18.427,-20.207,18.427,-20.207],["v",-1.336],["c",0,0,0.444,-1.513,-0.089,-0.444],["c",-0.535,1.068,-3.65,1.245,-3.384,-0.889],["c",0.268,-2.137,-0.356,-8.549,-0.356,-8.549],["s",-1.157,5.789,-2.758,5.61],["c",-1.603,-0.179,-2.493,-2.672,-2.405,-5.432],["c",0.089,-2.758,-1.157,-9.702,-1.157,-9.702],["c",-0.8,11.75,-8.277,8.011,-8.277,3.74],["c",0,-4.274,-4.541,-12.82,-4.541,-12.82],["s",2.403,14.421,-1.336,14.421],["c",-3.737,0,-6.944,-5.074,-9.879,-9.882],["C",78.161,5.874,68.279,0,68.279,0],["c",13.428,16.088,17.656,32.111,18.397,44.512],["c",-1.793,0.422,-2.908,2.224,-2.908,2.224],["c",0.356,-2.847,-0.624,-7.745,-1.245,-9.882],["c",-0.624,-2.137,-1.159,-9.168,-1.159,-9.168],["c",0,2.67,-0.979,5.253,-2.048,9.079],["c",-1.068,3.828,-0.801,6.054,-0.801,6.054],["c",-1.068,-2.227,-4.271,-2.137,-4.271,-2.137],["c",1.336,1.783,0.177,2.493,0.177,2.493],["s",0,0,-1.424,-1.601],["c",-1.424,-1.603,-3.473,-0.981,-3.384,0.265],["c",0.089,1.247,0,1.959,-2.849,1.959],["c",-2.846,0,-5.874,-3.47,-9.078,-3.116],["c",-3.206,0.356,-5.521,2.137,-5.698,6.678],["c",-0.179,4.541,1.869,5.251,1.869,5.251],["c",-0.801,-0.443,-0.891,-1.067,-0.891,-3.473],...

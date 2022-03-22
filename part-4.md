@@ -222,9 +222,9 @@ stream.on('data', function(chunk) {
 
 首先，我们引入了Fabric```fabric = require('fabric').fabric```，然后我们用```fabric.createCanvasForNode()```替代了平时使用的```new fabric.Canvas()```来创建了Fabric的canvas画布，此方法将width和height作为参数，并创建该大小的画布（在这种不传参的情况下为200x200）。
 
-然后有熟悉的对象创建（```new fabric.Text（）```）和添加到画布（```canvas.add（text）```）。
+然后有熟悉的对象创建（```new fabric.Text()```）和添加到画布（```canvas.add(text)```）。
 
-到目前做的一切都只是创建了一个Fabric画布，然后渲染了一个text文本，现在，如何创建在画布上呈现的任何图像？在canvas实例上使用可用的```createPNGStream```方法。```createPNGStream```返回Node的[流](http://nodejs.org/api/stream.html)，然后可以使用```on（'data'）```输出到图像文件中，并将其写入与图像文件（```fs.createWriteStream（）```）对应的流中。
+到目前做的一切都只是创建了一个Fabric画布，然后渲染了一个text文本，现在，如何创建在画布上呈现的任何图像？在canvas实例上使用可用的```createPNGStream```方法。```createPNGStream```返回Node的[流](http://nodejs.org/api/stream.html)，然后可以使用```on('data')```输出到图像文件中，并将其写入与图像文件（```fs.createWriteStream()```）对应的流中。
 
 ```fabric.createCanvasForNode```和```canvas.createPNGStream```几乎是Node特有的唯一2种方法，其他一切都是一样的。您仍然可以按照通常的方式创建对象，将它们添加到画布上，修改，渲染等。值得一提的是，当您通过```createCanvasForNode```创建画布时，它将使用```nodeCanvas```属性进行扩展，该属性是对原始节点画布实例的引用。
 
@@ -340,7 +340,7 @@ stream.on('data', function(chunk) {
 
 ![ ](http://fabricjs.com/article_assets/4_16.png)
 
-让我们仔细看看发生了什么。首先，通过将字体名称和路径（作为常规字体文件）作为参数传递，创建一个字体对象```new canvas.Font（）```。然后通过将字体path，weight和style作为参数传递，使用```font.addFace（）```添加其他字体。最后，使用```canvas.contextContainer.addFont（）```（当使用**createPNGStream**或**createJPEGStream**时）或```canvas.contextTop.addFont（）```（使用**toDataURL**或**toDataURLWithMultiplier**时）可以将字体添加到所需的上下文中。
+让我们仔细看看发生了什么。首先，通过将字体名称和路径（作为常规字体文件）作为参数传递，创建一个字体对象```new canvas.Font()```。然后通过将字体path，weight和style作为参数传递，使用```font.addFace()```添加其他字体。最后，使用```canvas.contextContainer.addFont()```（当使用**createPNGStream**或**createJPEGStream**时）或```canvas.contextTop.addFont()```（使用**toDataURL**或**toDataURLWithMultiplier**时）可以将字体添加到所需的上下文中。
 
 现在我们可以通过将```fabric.Text```对象的**fontFamily**属性设置为字体名称来使用我们的字体。结合**fontWeight**和**fontStyle**属性，我们可以应用我们添加的字体。有关这些属性的更多信息，请参阅第2部分。请注意，该示例显示了如何在创建新文本对象时使用自定义字体，但这也适用于通过JSON加载的文本对象。
 

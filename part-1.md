@@ -2,13 +2,13 @@
 
 ![ ](https://github.com/kangax/fabric.js/raw/master/lib/screenshot.png)
 
-今天我开始像您介绍[Fabric](http://fabricjs.com/)，一个功能强大的Javascript库，运行在HTML5 canvas上，Fabric为画布提供了一个缺失的对象模型，以及一个SVG解析器，一个交互层，以及一整套其他必不可少的工具。它是一个完全开放源码的项目，在MIT许可，多年来做出了许多贡献。
+今天我想向您介绍[Fabric](http://fabricjs.com/)，一个使得使用HTML5 canvas很容易的功能强大的Javascript库。Fabric为canvas提供了缺失的对象模型、SVG解析器、交互层以及一整套必不可少的工具。它是一个完全开放源码的项目，使用MIT许可协议，多年来做出了许多贡献。
 
-三年前我开始开发Fabric，在发现使用原生canvas的API之后，我正在为[printio.ru](http://printio.ru/)创建一个互动设计编辑器：我的创业公司允许用户设计自己的服装。在这些日子里，我们想要的那种交互性只存在于Flash应用中。而现在，"Fabric"成为可能。
+Fabric开发始于2010年，在发现使用原生canvas的API非常痛苦之后。之前的作者为[printio.ru](http://printio.ru/)创建一个互动设计编辑器：他的创业公司允许用户设计自己的服装。在那个时代，那种交互性只存在于Flash应用中。即使是现在，市面上也很少有工具像"Fabric"一样使这种交互性成为可能。
 
-让我们来看看吧！
+让我们看得更仔细些吧！
 
-## 为什么要做fabric
+## 为什么选择fabric
 
 [Canvas](http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html)可以让我们在网络上创造出绝对惊人的图形。但它提供的API是令人失望的。如果我们只想在画布上画几条基本的形状，不会觉得有什么繁琐。但是一旦需要任何形式的互动，任何时候改变图片或绘制更复杂的形状，代码复杂度会急剧增加。
 
@@ -300,7 +300,7 @@ canvas.onFpsUpdate = function(){ /* ... */ };
 
 虽然我们是一个canvas元素的主题，我们来谈谈互动。Fabric的独特功能之一，在我们刚刚看到的所有的对象模型之上，是一层交互性。
 
-存在对象模型以允许编程访问和操纵画布上的对象。但在外部，在用户层面上，有一种方式可以通过鼠标（或触摸，触摸设备）来操纵这些对象。一旦您通过```new fabric.Canvas（'...'）```初始化画布，可以选择对象，拖动它们，缩放或旋转它们，甚至组合在一起操纵一个**组合**！
+存在对象模型以允许编程访问和操纵画布上的对象。但在外部，在用户层面上，有一种方式可以通过鼠标（或触摸，触摸设备）来操纵这些对象。一旦您通过```new fabric.Canvas('...')```初始化画布，可以选择对象，拖动它们，缩放或旋转它们，甚至组合在一起操纵一个**组合**！
 
 ![ ](http://fabricjs.com/article_assets/7.png)
 ![ ](http://fabricjs.com/article_assets/8.png)
