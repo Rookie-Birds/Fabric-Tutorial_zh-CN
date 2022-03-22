@@ -15,6 +15,7 @@
   - 渐变（Gradients）
   - 文本（Text）
   - 字体（fontFamily）
+  - 事件（Events）
 - [第三部分](./part-3.md)
   - 组合（Group）
   - 序列化
