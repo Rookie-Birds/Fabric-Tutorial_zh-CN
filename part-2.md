@@ -122,7 +122,7 @@ fabric.Image.fromURL('pug.jpg', function(img) {
 那么现在，您已经熟悉了Fabric滤镜，现在是时候开箱并创建自己的滤镜了！
 
 ```js
-fabric.Image.filters.Redify = fabric.util.createClass({
+fabric.Image.filters.Redify = fabric.util.createClass(fabric.Image.filters.BaseFilter, {
 
   type: 'Redify',
 
@@ -134,8 +134,8 @@ fabric.Image.filters.Redify = fabric.util.createClass({
     'varying vec2 vTexCoord;\n' +
     'void main() {\n' +
       'vec4 color = texture2D(uTexture, vTexCoord);\n' +
-      'color.g = 0;\n' +
-      'color.b = 0;\n' +
+      'color.g = 0.0;\n' +
+      'color.b = 0.0;\n' +
       'gl_FragColor = color;\n' +
     '}',
 
@@ -151,7 +151,7 @@ fabric.Image.filters.Redify = fabric.util.createClass({
   }
 });
 
-fabric.Image.filters.Brightness.fromObject = fabric.Image.filters.BaseFilter.fromObject;
+fabric.Image.filters.Redify.fromObject = fabric.Image.filters.BaseFilter.fromObject;
 ```
 
 ![ ](http://fabricjs.com/article_assets/2_4.png)
