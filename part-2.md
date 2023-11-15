@@ -225,16 +225,27 @@ circle.set('fill', gradient);
 这是一个从左到右的红蓝渐变：
 
 ```js
-circle.setGradient('fill', {
-  x1: 0,
-  y1: 0,
-  x2: circle.width,
-  y2: 0,
-  colorStops: {
-    0: "red",
-    1: "blue"
-  }
-});
+  var gradient = new fabric.Gradient({
+    type: 'linear',
+    gradientUnits: 'pixels',
+    coords: { x1: 0, y1: 0, x2: circle.width, y2: 0 },
+    colorStops:[
+      { offset: 0, color: 'red' },
+      { offset: 1, color: 'blue'}
+    ]
+  })
+
+ // 或者用百分比的形式
+  var gradient = new fabric.Gradient({
+    type: 'linear',
+    gradientUnits: 'percentage',
+    coords: { x1: 0, y1: 0, x2: 1, y2: 0 },
+    colorStops:[
+      { offset: 0, color: 'red' },
+      { offset: 1, color: 'blue'}
+    ]
+  })
+
 ```
 
 ![ ](http://fabricjs.com/article_assets/2_16.png)
@@ -242,19 +253,18 @@ circle.setGradient('fill', {
 这是一个彩虹🌈渐变，颜色跨度20%：
 
 ```js
-circle.setGradient('fill', {
-  x1: 0,
-  y1: 0,
-  x2: circle.width,
-  y2: 0,
-  colorStops: {
-    0: "red",
-    0.2: "orange",
-    0.4: "yellow",
-    0.6: "green",
-    0.8: "blue",
-    1: "purple"
-  }
+var gradient = new fabric.Gradient({
+  type: 'linear',
+  gradientUnits: 'pixels', // or 'percentage'
+  coords: { x1: 0, y1: 0, x2: circle.width, y2: 0 },
+  colorStops:[
+    { offset: 0, color: 'red' },
+    { offset: 0.2, color: 'orange' },
+    { offset: 0.4, color: 'yellow' },
+    { offset: 0.6, color: 'green' },
+    { offset: 0.8, color: 'blue' },
+    { offset: 1, color: 'purple' }
+  ]
 });
 ```
 
